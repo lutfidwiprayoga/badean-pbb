@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\KelolaPbbController;
+use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Admin\RiwayatController;
+use App\Http\Controllers\Admin\ValidasiController;
 use App\Http\Controllers\Masyarakat\CariController;
 use App\Http\Controllers\Masyarakat\DaftarController;
+use App\Http\Controllers\Masyarakat\PDFController as MasyarakatPDFController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +27,13 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//masyarakat
 Route::post('/daftarakun', [DaftarController::class, 'daftar'])->name('masyarakat.daftar');
-Route::resource('/riwayatpbb', RiwayatController::class);
 Route::get('/caridatapbb', [CariController::class, 'cari'])->name('cari.pbb');
+Route::get('/cetak-pdf', [MasyarakatPDFController::class, 'pdf'])->name('masyarakat.pdf');
+//admin
+Route::resource('/kelolapbb', KelolaPbbController::class);
+Route::resource('/riwayatpbb', RiwayatController::class);
+Route::get('/validasi-user', [ValidasiController::class, 'index'])->name('validuser.index');
+Route::put('/validasi-user/{id}', [ValidasiController::class, 'validasi'])->name('validuser.verify');
+Route::get('/cetak-pdf/riwayat', [PDFController::class, 'cetakPDF'])->name('admin.pdf');

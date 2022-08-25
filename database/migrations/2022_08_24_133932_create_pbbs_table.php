@@ -15,14 +15,17 @@ return new class extends Migration
     {
         Schema::create('pbbs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('nop_id');
+            $table->string('nama_wp');
+            $table->string('alamat_wp');
             $table->string('tahun');
-            $table->string('pbb');
-            $table->string('denda');
-            $table->string('kekurangan');
-            $table->string('status_bayar');
-            $table->string('kode_bayar');
+            $table->string('pbb')->nullable();
+            $table->string('denda')->nullable();
+            $table->string('kekurangan')->nullable();
+            $table->date('jatuh_tempo')->nullable();
+            $table->string('status_bayar')->nullable();
+            $table->string('kode_bayar')->nullable();
             $table->timestamps();
         });
     }

@@ -10,64 +10,74 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="GET">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select name="dari" class="form-select">
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2018">2018</option>
-                                </select>
-                                <p>S/D</p>
-                                <select name="dari" class="form-select">
-                                    <option value="2022">2022</option>
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                    <option value="2019">2019</option>
-                                    <option value="2018">2018</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 pull-right">
-                                <a type="button" href="" class="btn btn-primary btn-sm">
-                                    Cetak PDF
-                                </a>
-                            </div>
-                        </div>
-                    </form>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="table-bordered">
-                                <table class="display expandable-table" style="width:100%">
-                                    <thead>
+                        <div class="col-md-6 my-2">
+                            <form action="{{ route('riwayatpbb.index') }}" method="GET">
+                                <div class="input-group mb-1">
+                                    <select name="tahun_awal" class="form-select">
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                    </select>
+                                    <select name="tahun_akhir" class="form-select">
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                    </select>
+                                    <button class="btn btn-success btn-sm" type="submit">Cari</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 my-2">
+                            <a type="button" href="{{ route('admin.pdf') }}" class="btn btn-success" style="float: right">
+                                Cetak PDF
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>NAMA WAJIB PAJAK</th>
+                                        <th>TAHUN PAJAK</th>
+                                        <th>PBB</th>
+                                        <th>DENDA(*)</th>
+                                        <th>KURANG BAYAR</th>
+                                        <th>STATUS BAYAR</th>
+                                        <th>KODE BAYAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($cetak as $i => $row)
                                         <tr>
-                                            <th>No</th>
-                                            <th>NAMA WAJIB PAJAK</th>
-                                            <th>TAHUN PAJAK</th>
-                                            <th>PBB</th>
-                                            <th>DENDA(*)</th>
-                                            <th>KURANG BAYAR</th>
-                                            <th>STATUS BAYAR</th>
-                                            <th>KODE BAYAR</th>
+                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $row->nama_wp }}</td>
+                                            <td>{{ $row->tahun }}</td>
+                                            <td>Rp. {{ number_format($row->pbb) }}</td>
+                                            <td>Rp. {{ number_format($row->denda) }}</td>
+                                            <td>Rp. {{ number_format($row->kekurangan) }}</td>
+                                            <td><b>{{ $row->status_bayar }}</b></td>
+                                            <td><i>{{ $row->kode_bayar }}</i></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($cetak as $i => $row)
-                                            <tr>
-                                                <td>{{ ++$i }}</td>
-                                                <td>{{ $row->nama_wp }}</td>
-                                                <td>{{ $row->pbb->tahun }}</td>
-                                                <td>Rp. {{ number_format($row->pbb->pbb) }}</td>
-                                                <td>{{ $row->pbb->denda }}</td>
-                                                <td>{{ $row->pbb->kekurangan }}</td>
-                                                <td>{{ $row->pbb->status_bayar }}</td>
-                                                <td>{{ $row->pbb->kode_bayar }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach
+                                </tbody>
+                                <tfoot>
+                                    @foreach ($total as $row)
+                                        <tr>
+                                            <th colspan="5">Total</th>
+                                            <th>Rp. {{ number_format($row->kurang_bayar) }}</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    @endforeach
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>

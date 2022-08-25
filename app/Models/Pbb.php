@@ -9,8 +9,11 @@ class Pbb extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nama',
+        'nop_id',
         'user_id',
+        'nama_wp',
+        'alamat_wp',
+        'jatuh_tempo',
         'tahun',
         'pbb',
         'denda',
@@ -19,6 +22,10 @@ class Pbb extends Model
         'kode_bayar',
     ];
 
+    public function nop()
+    {
+        return $this->belongsTo(Nop::class, 'nop_id', 'id');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

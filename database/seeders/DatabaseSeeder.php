@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(UserSeeder::class);
         $this->call(NikSeeder::class);
+        $this->call(NopSeeder::class);
         $this->call(DataPBBSeeder::class);
     }
 }

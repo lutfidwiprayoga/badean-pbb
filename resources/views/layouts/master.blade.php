@@ -12,7 +12,7 @@
 
 <body>
     @include('layouts.navbar')
-    <div class="container">
+    <div class="container mt-5">
         @yield('main')
     </div>
     @include('layouts.footer')

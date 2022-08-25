@@ -10,11 +10,7 @@ class Cetak extends Model
     use HasFactory;
     protected $fillable = [
         'pbb_id',
-        'nop',
-        'nama_wp',
-        'alamat_wp',
         'tanggal_print',
-        'jatuh_tempo',
     ];
 
     public function pbb()

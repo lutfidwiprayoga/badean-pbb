@@ -14,7 +14,7 @@
                     <div class="card-header">{{ __('Register') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('masyarakat.daftar') }}">
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <div class="row mb-3">
@@ -78,14 +78,18 @@
                                     @enderror
                                 </div>
                             </div>
+                            <input type="text" name="role" value="masyarakat" hidden>
                             <div class="row mb-3">
                                 <label for="alamat"
                                     class="col-md-4 col-form-label text-md-end">{{ __('Alamat') }}</label>
                                 <div class="col-md-6">
-                                    <input id="alamat" type="text"
-                                        class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                        value="{{ old('alamat') }}" required autocomplete="alamat">
-
+                                    <select name="alamat" class="form-control @error('alamat') is-invalid @enderror"
+                                        id="" required autocomplete="alamat">
+                                        <option value="DSN JATISARI">DSN JATISARI</option>
+                                        <option value="DSN SUKOJATI">DSN SUKOJATI</option>
+                                        <option value="DSN KRAJAN">DSN KRAJAN</option>
+                                        <option value="DSN PECEMENGAN">DSN PECEMENGAN</option>
+                                    </select>
                                     @error('alamat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

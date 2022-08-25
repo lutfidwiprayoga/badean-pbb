@@ -4,32 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cetak;
+use App\Models\Nop;
 use App\Models\Pbb;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class RiwayatController extends Controller
+class KelolaPbbController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        if (request()->tahun_awal || request()->tahun_akhir) {
-            $tahun_awal = $request->input('tahun_awal');
-            $tahun_akhir = $request->input('tahun_akhir');
-            $cetak = Pbb::join('cetaks', 'cetaks.pbb_id', '=', 'pbbs.id')->whereBetween('tahun', [$tahun_awal, $tahun_akhir])->get();
-        } else {
-            $cetak = Pbb::latest()->get();
-        }
-        $total = DB::table('pbbs')
-            ->join('cetaks', 'cetaks.pbb_id', '=', 'pbbs.id')
-            ->select(DB::raw('sum(kekurangan) as kurang_bayar'))
-            ->get();
-        return view('admin.riwayat', compact('cetak', 'total'));
+        $kelola = Pbb::latest()->get();
+        $user = User::where('role', 'masyarakat')->get();
+        return view('admin.kelolaPbb', compact('kelola', 'user'));
     }
 
     /**
@@ -50,7 +41,27 @@ class RiwayatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nop = Nop::create([
+            'nop' => $request->nop,
+        ]);
+        $pbb = Pbb::create([
+            'user_id' => $request->user_id,
+            'nop_id' => $nop->id,
+            'nama_wp' => $request->nama_wp,
+            'alamat_wp' => $request->alamat_wp,
+            'tahun' => $request->tahun,
+            'pbb' => $request->pbb,
+            'denda' => $request->denda,
+            'kekurangan' => $request->kekurangan,
+            'jatuh_tempo' => $request->jatuh_tempo,
+            'status_bayar' => $request->status_bayar,
+            'kode_bayar' => $request->kode_bayar,
+        ]);
+        $cetak = new Cetak();
+        $cetak->pbb_id = $pbb->id;
+        $cetak->save();
+
+        return redirect()->back()->with('sukses', 'Data Berhasil Di Tambah');
     }
 
     /**

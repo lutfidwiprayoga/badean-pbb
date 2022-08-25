@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cetaks', function (Blueprint $table) {
+        Schema::create('nops', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pbb_id');
-            $table->date('tanggal_print')->nullable();
+            $table->string('nop');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cetaks');
+        Schema::dropIfExists('nops');
     }
 };
