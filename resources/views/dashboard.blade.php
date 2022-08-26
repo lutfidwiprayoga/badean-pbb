@@ -1,8 +1,10 @@
 @extends('layouts.master')
 @section('main')
     <div class="row">
-        <div class="col-12">
-            <img src="{{ url('img') }}/desa.jpg" width="100%">
+        <div class="col-md-12">
+            <div id="bg">
+                <img src="{{ url('img') }}/desa.jpg">
+            </div>
         </div>
     </div>
 @endsection

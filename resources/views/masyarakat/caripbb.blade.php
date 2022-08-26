@@ -1,60 +1,64 @@
 @extends('layouts.master')
 @section('main')
     <div class="row">
-        <div class="col-12">
+        <div class="col-md-12">
             <div class="card">
-                <p class="card-title">Cari Data Pajak Dan Bangunan</p>
+                <p class="card-header">Cari Data Pajak Dan Bangunan</p>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
                             <form action="{{ route('cari.pbb') }}" method="GET">
-                                <div class="form-group">
-                                    <label for="" class="col-sm-2 form-check-label">NOP</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="cari">
+                                <div class="m-2 row">
+                                    <label for="nop" class="col-md-2 form-label">Kode Objek Pajak (NOP)</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="nop" name="cari"
+                                            placeholder="Masukkan Nomor Objek Pajak" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-success" type="submit" style="width: 85%">Cari</button>
+                                <div class="row text-center">
+                                    <div class="col-md-12">
+                                        <button class="btn btn-success mt-1" type="submit"
+                                            style="width: 20%; justify-content: center;">Cari</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    @if (Request::input('cari'))
+            </div><br>
+            @if (Request::input('cari'))
+                <div class="card">
+                    <div class="card-body">
                         <div class="row">
-                            @foreach ($hasil as $i => $data)
-                                <div class="col-md-12">
+                            <div class="col-md-12">
+                                @foreach ($hasil as $i => $data)
                                     <table class="table-condensed">
                                         <tr>
                                             <th width="50%">NOP</th>
                                             <th width="30px">:</th>
-                                            <th>{{ $data->nop }}</th>
+                                            <td>{{ $data->nop }}</td>
                                         </tr>
                                         <tr>
                                             <th width="50%">Alamat Objek Pajak</th>
                                             <th width="30px">:</th>
-                                            <th>{{ $data->user->alamat }}</th>
+                                            <td>{{ $data->user->alamat }}</td>
                                         </tr>
                                         <tr>
                                             <th width="50%">Nama Wajib Pajak</th>
                                             <th width="30px">:</th>
-                                            <th>{{ $data->nama_wp }}</th>
+                                            <td>{{ $data->nama_wp }}</td>
                                         </tr>
                                         <tr>
                                             <th width="50%">Alamat Wajib Pajak</th>
                                             <th width="30px">:</th>
-                                            <th>{{ $data->alamat_wp }}</th>
+                                            <td>{{ $data->alamat_wp }}</td>
                                         </tr>
                                         <tr>
                                             <th width="50%">Tanggal Print Out</th>
                                             <th width="30px">:</th>
-                                            <th>{{ date('d/m/Y', strtotime(today())) }}</th>
+                                            <td>{{ date('d/m/Y', strtotime(today())) }}</td>
                                         </tr>
-                                    </table>
+                                    </table><br>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
@@ -106,12 +110,12 @@
                                             <button type="submit" class="btn btn-success btn-sm">Cetak PDF</button>
                                         </div>
                                     </form>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
-                    @endif
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection

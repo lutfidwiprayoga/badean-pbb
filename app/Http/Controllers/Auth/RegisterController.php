@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Nik;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -52,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
-            'nik' => ['required', 'string', 'max:255'],
+            'nik' => ['required', 'string', 'max:255',],
             'alamat' => ['required', 'string', 'max:255'],
             'no_hp' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
