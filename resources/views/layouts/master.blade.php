@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <style>
         body {
             font-family: Poppins, sans-serif;
@@ -81,6 +83,8 @@
         @yield('main')
     </div>
     @include('layouts.footer')
+    <!-- Fontawesome JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js"></script>
 </body>
 
 </html>

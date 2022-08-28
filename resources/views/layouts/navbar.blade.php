@@ -4,37 +4,45 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                        <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home"></i> Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cari.pbb') }}">Pencarian Data PBB</a>
+                        <a class="nav-link" href="{{ route('cari.pbb') }}"><i class="fa fa-file-circle-question"></i>
+                            Pencarian
+                            Data
+                            PBB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Informasi</a>
+                        <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
                     </li>
                 @else
                     @if (Auth::user()->role == 'masyarakat')
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                            <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home"></i>
+                                Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cari.pbb') }}">Pencarian Data PBB</a>
+                            <a class="nav-link" href="{{ route('cari.pbb') }}"><i class="fa fa-file-circle-question"></i>
+                                Pencarian Data PBB</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Informasi</a>
+                            <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
                         </li>
                     @elseif (Auth::user()->role == 'admin')
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Beranda</a>
+                            <a class="nav-link active" aria-current="page" href="/"><i class="fa fa-home"></i>
+                                Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('riwayatpbb.index') }}">Pencarian Data PBB</a>
+                            <a class="nav-link" href="{{ route('riwayatpbb.index') }}"><i
+                                    class="fa fa-file-circle-question"></i> Pencarian Data PBB</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('kelolapbb.index') }}">Input Data PBB</a>
+                            <a class="nav-link" href="{{ route('kelolapbb.index') }}"><i class="fa fa-edit"></i> Input
+                                Data PBB</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Informasi</a>
+                            <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
                         </li>
                     @endif
                 @endguest
@@ -44,7 +52,7 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}"><i class="fa fa-user-circle"></i> Login</a>
                         </li>
                     @endif
                 @else
