@@ -18,7 +18,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NOP</th>
                                 <th>NAMA WAJIB PAJAK</th>
+                                <th>ALAMAT WAJIB PAJAK</th>
                                 <th>TAHUN PAJAK</th>
                                 <th>PBB</th>
                                 <th>DENDA(*)</th>
@@ -31,7 +33,9 @@
                             @foreach ($kelola as $i => $row)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $row->nama_wp }}</td>
+                                    <td>{{ $row->nop->nop }}</td>
+                                    <td>{{ $row->nop->nama_wp }}</td>
+                                    <td>{{ $row->nop->alamat_wp }}</td>
                                     <td>{{ $row->tahun }}</td>
                                     <td>Rp. {{ number_format($row->pbb) }}</td>
                                     <td>Rp. {{ number_format($row->denda) }}</td>
@@ -47,7 +51,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="tambahData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahData" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header justify-content-center">
@@ -57,31 +61,14 @@
                     @csrf
                     <div class="modal-body">
                         <div class="m-2 row">
-                            <div class="col-md-6">
+                            <div class="col-md-9">
                                 <label for="nop" class="form-label">Kode Objek Pajak (NOP)*</label>
-                                <input type="text" class="form-control" id="nop" name="nop"
-                                    placeholder="Masukkan Nomor Objek Pajak" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="nop" class="form-label">Nama Objek Pajak*</label>
-                                <select name="user_id" class="form-select" required>
-                                    @foreach ($user as $us)
-                                        <option value="{{ $us->id }}">{{ $us->name }}</option>
+                                <select name="nop_id" class="form-select" id="nop-Select" required>
+                                    @foreach ($nop as $row)
+                                        <option value="{{ $row->id }}">{{ $row->nop }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="m-2 row">
-                            <div class="col-md-6">
-                                <label for="nop" class="form-label">Nama Wajib Pajak*</label>
-                                <input type="text" class="form-control" name="nama_wp">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="nop" class="form-label">Alamat Wajib Pajak*</label>
-                                <input type="text" class="form-control" name="alamat_wp" value="DSN JATISARI">
-                            </div>
-                        </div>
-                        <div class="m-2 row">
                             <div class="col-md-3">
                                 <label for="nop" class="form-label">Tahun*</label>
                                 <select name="tahun" class="form-select" required>
@@ -92,38 +79,34 @@
                                     <option value="2018">2018</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                        </div>
+                        <div class="m-2 row">
+                            <div class="col-md-4">
                                 <label for="nop" class="form-label">PBB*</label>
                                 <input type="number" class="form-control" name="pbb" required>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="nop" class="form-label">Denda*</label>
                                 <input type="number" class="form-control" name="denda" required>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="nop" class="form-label">Kurang Bayar*</label>
                                 <input type="number" class="form-control" name="kekurangan" required>
                             </div>
                         </div>
                         <div class="m-2 row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="nop" class="form-label">Jatuh Tempo*</label>
                                 <input type="date" class="form-control" name="jatuh_tempo" required>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="nop" class="form-label">Status Bayar*</label>
                                 <select name="status_bayar" class="form-select">
                                     <option value=""></option>
                                     <option value="LUNAS">LUNAS</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label for="nop" class="form-label">Kode Bayar*</label>
-                                <select name="kode_bayar" class="form-select">
-                                    <option value=""></option>
-                                    <option value="LUNAS">LUNAS</option>
-                                </select>
-                            </div>
+                            <input type="hidden" name=kode_bayar"" value="{{ $tanggal . $nomor_urut }}">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -139,4 +122,13 @@
             </div>
         </div>
     </div>
+    <script>
+        // $(document).ready(function() {});
+        $('.form-select').select2({
+            dropdownParent: $("#tambahData"),
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+        });
+    </script>
 @endsection

@@ -38,6 +38,10 @@
                                     class="fa fa-file-circle-question"></i> Pencarian Data PBB</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('kelolanop.index') }}"><i class="fa fa-edit"></i> Input
+                                Data NOP</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('kelolapbb.index') }}"><i class="fa fa-edit"></i> Input
                                 Data PBB</a>
                         </li>

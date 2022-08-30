@@ -15,10 +15,7 @@ return new class extends Migration
     {
         Schema::create('pbbs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('nop_id');
-            $table->string('nama_wp');
-            $table->string('alamat_wp');
             $table->string('tahun');
             $table->string('pbb')->nullable();
             $table->string('denda')->nullable();

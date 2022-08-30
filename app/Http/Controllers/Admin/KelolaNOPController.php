@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cetak;
 use App\Models\Nop;
-use App\Models\Pbb;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class KelolaPbbController extends Controller
+class KelolaNOPController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,14 +16,9 @@ class KelolaPbbController extends Controller
      */
     public function index()
     {
-        $kelola = Pbb::latest()->get();
-        $user = User::where('role', 'masyarakat')->get();
         $nop = Nop::get();
-        $max_id = DB::table('nops')->max('id');
-        $nomor_urut = $max_id + 1;
-        $now = Carbon::now();
-        $tanggal = $now->year . $now->month . $now->day;
-        return view('admin.kelolaPbb', compact('kelola', 'user', 'nop', 'tanggal', 'nomor_urut'));
+        $user = User::where('role', 'masyarakat')->get();
+        return view('admin.kelolaNOP', compact('nop', 'user'));
     }
 
     /**
@@ -48,23 +39,14 @@ class KelolaPbbController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        $nop = Nop::find($request->input('id'));
-        $pbb = Pbb::create([
-            'nop_id' => $request->nop_id,
-            'tahun' => $request->tahun,
-            'pbb' => $request->pbb,
-            'denda' => $request->denda,
-            'kekurangan' => $request->kekurangan,
-            'jatuh_tempo' => $request->jatuh_tempo,
-            'status_bayar' => $request->status_bayar,
-            'kode_bayar' => $request->kode_bayar
+        Nop::create([
+            'user_id' => $request->user_id,
+            'nop' => $request->nop,
+            'nama_wp' => $request->nama_wp,
+            'alamat_wp' => $request->alamat_wp,
         ]);
-        $cetak = new Cetak();
-        $cetak->pbb_id = $pbb->id;
-        $cetak->save();
 
-        return redirect()->back()->with('sukses', 'Data Berhasil Di Tambah');
+        return redirect()->back()->with('sukses', 'Data Wajib Pajak Berhasil Ditambahkan');
     }
 
     /**

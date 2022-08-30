@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\KelolaNOPController;
 use App\Http\Controllers\Admin\KelolaPbbController;
 use App\Http\Controllers\Admin\PDFController;
 use App\Http\Controllers\Admin\RiwayatController;
@@ -33,6 +34,7 @@ Route::get('/caridatapbb', [CariController::class, 'cari'])->name('cari.pbb');
 Route::get('/cetak-pdf', [MasyarakatPDFController::class, 'pdf'])->name('masyarakat.pdf');
 //admin
 Route::resource('/kelolapbb', KelolaPbbController::class);
+Route::resource('/kelolanop', KelolaNOPController::class);
 Route::resource('/riwayatpbb', RiwayatController::class);
 Route::get('/validasi-user', [ValidasiController::class, 'index'])->name('validuser.index');
 Route::put('/validasi-user/{id}', [ValidasiController::class, 'validasi'])->name('validuser.verify');

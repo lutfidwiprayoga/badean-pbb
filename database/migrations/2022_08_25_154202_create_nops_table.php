@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('nops', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('nop');
+            $table->string('nama_wp');
+            $table->string('alamat_wp');
             $table->timestamps();
         });
     }

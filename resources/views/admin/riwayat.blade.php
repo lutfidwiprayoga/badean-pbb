@@ -44,7 +44,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>NOP</th>
                                         <th>NAMA WAJIB PAJAK</th>
+                                        <th>ALAMAT WAJIB PAJAK</th>
                                         <th>TAHUN PAJAK</th>
                                         <th>PBB</th>
                                         <th>DENDA(*)</th>
@@ -57,7 +59,9 @@
                                     @foreach ($cetak as $i => $row)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $row->nama_wp }}</td>
+                                            <td>{{ $row->nop->nop }}</td>
+                                            <td>{{ $row->nop->nama_wp }}</td>
+                                            <td>{{ $row->nop->alamat_wp }}</td>
                                             <td>{{ $row->tahun }}</td>
                                             <td>Rp. {{ number_format($row->pbb) }}</td>
                                             <td>Rp. {{ number_format($row->denda) }}</td>
@@ -70,7 +74,7 @@
                                 <tfoot>
                                     @foreach ($total as $row)
                                         <tr>
-                                            <th colspan="5">Total</th>
+                                            <th colspan="7">Total</th>
                                             <th>Rp. {{ number_format($row->kurang_bayar) }}</th>
                                             <th></th>
                                             <th></th>
@@ -84,4 +88,12 @@
             </div>
         </div>
     </div>
+    <script>
+        // $(document).ready(function() {});
+        $('.form-select').select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+        });
+    </script>
 @endsection

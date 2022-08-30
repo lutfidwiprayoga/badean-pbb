@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Agu 2022 pada 21.10
+-- Waktu pembuatan: 30 Agu 2022 pada 15.25
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -40,17 +40,16 @@ CREATE TABLE `cetaks` (
 --
 
 INSERT INTO `cetaks` (`id`, `pbb_id`, `tanggal_print`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(2, 2, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(3, 3, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(4, 4, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(5, 5, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(6, 6, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(7, 7, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(8, 8, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(9, 9, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(10, 10, NULL, '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(11, 8, NULL, '2022-08-25 11:20:24', '2022-08-25 11:20:24');
+(1, 1, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(2, 2, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(3, 3, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(4, 4, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(5, 5, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(6, 6, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(7, 7, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(8, 8, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(9, 9, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(10, 10, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42');
 
 -- --------------------------------------------------------
 
@@ -131,7 +130,10 @@ INSERT INTO `niks` (`id`, `nik`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `nops` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `nop` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -140,15 +142,15 @@ CREATE TABLE `nops` (
 -- Dumping data untuk tabel `nops`
 --
 
-INSERT INTO `nops` (`id`, `nop`, `created_at`, `updated_at`) VALUES
-(1, '351025000703000050', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(2, '351025000703000060', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(3, '351025000703000090', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(4, '351025000703000110', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(5, '351025000703000120', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(6, '351025000703600340', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(7, '351025000703600710', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(8, '351056000201000340', '2022-08-25 11:20:24', '2022-08-25 11:20:24');
+INSERT INTO `nops` (`id`, `user_id`, `nop`, `nama_wp`, `alamat_wp`, `created_at`, `updated_at`) VALUES
+(1, 8, '351025000703000050', 'ABD. AZIZ, SH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(2, 2, '351025000703000060', 'HOLILAH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(3, 3, '351025000703000090', 'SUHRAN P FAUZI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(4, 4, '351025000703000110', 'H. MAHRUS', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(5, 5, '351025000703000120', 'MANSURI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(6, 6, '351025000703600340', 'ALIMI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(7, 7, '351025000703600710', 'SATUNI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(8, 8, '35102500702000150', 'ABD AZIZ, SH', 'DSN JATISARI', '2022-08-29 21:29:56', '2022-08-29 21:29:56');
 
 -- --------------------------------------------------------
 
@@ -170,17 +172,14 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `pbbs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
   `nop_id` bigint(20) UNSIGNED NOT NULL,
-  `nama_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tahun` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `pbb` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `denda` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `kekurangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jatuh_tempo` date DEFAULT NULL,
   `status_bayar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kode_bayar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kode_bayar` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -189,15 +188,14 @@ CREATE TABLE `pbbs` (
 -- Dumping data untuk tabel `pbbs`
 --
 
-INSERT INTO `pbbs` (`id`, `user_id`, `nop_id`, `nama_wp`, `alamat_wp`, `tahun`, `pbb`, `denda`, `kekurangan`, `jatuh_tempo`, `status_bayar`, `kode_bayar`, `created_at`, `updated_at`) VALUES
-(1, 7, 7, 'SATUNI', 'DSN JATISARI', '2021', '28934', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(2, 8, 1, 'ABD. AZIZ, SH', 'DSN JATISARI', '2021', '76645', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(3, 2, 2, 'HOLILAH', 'DSN JATISARI', '2021', '38754', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(4, 6, 6, 'ALIMI', 'DSN JATISARI', '2021', '16622', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(5, 3, 3, 'SUHRAN P FAUZI', 'DSN JATISARI', '2021', '82814', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(6, 4, 4, 'H. MAHRUS', 'DSN JATISARI', '2021', '33760', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(7, 5, 5, 'MANSURI', 'DSN JATISARI', '2021', '22000', '0', '0', '2022-08-25', 'LUNAS', 'LUNAS', '2022-08-25 10:02:18', '2022-08-25 10:02:18'),
-(8, 9, 8, 'Muhammad Hizbi', 'DSN JATISARI', '2022', '45200', '0', '0', '2022-08-31', NULL, NULL, '2022-08-25 11:20:24', '2022-08-25 11:20:24');
+INSERT INTO `pbbs` (`id`, `nop_id`, `tahun`, `pbb`, `denda`, `kekurangan`, `jatuh_tempo`, `status_bayar`, `kode_bayar`, `created_at`, `updated_at`) VALUES
+(1, 7, '2021', '28934', '0', '0', '2022-08-30', 'LUNAS', 202208037, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(2, 1, '2021', '76645', '0', '0', '2022-08-30', 'LUNAS', 202208038, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(3, 2, '2021', '38754', '0', '0', '2022-08-30', 'LUNAS', 202208032, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(4, 6, '2021', '16622', '0', '0', '2022-08-30', 'LUNAS', 202208036, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(5, 3, '2021', '82814', '0', '0', '2022-08-30', 'LUNAS', 202208033, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(6, 4, '2021', '33760', '0', '0', '2022-08-30', 'LUNAS', 202208034, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
+(7, 5, '2021', '22000', '0', '0', '2022-08-30', 'LUNAS', 202208035, '2022-08-29 20:54:42', '2022-08-29 20:54:42');
 
 -- --------------------------------------------------------
 
@@ -325,7 +323,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `cetaks`
 --
 ALTER TABLE `cetaks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -355,7 +353,7 @@ ALTER TABLE `nops`
 -- AUTO_INCREMENT untuk tabel `pbbs`
 --
 ALTER TABLE `pbbs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
