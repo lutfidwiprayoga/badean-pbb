@@ -48,7 +48,7 @@ class KelolaPbbController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $nop = Nop::find($request->input('id'));
         $pbb = Pbb::create([
             'nop_id' => $request->nop_id,
@@ -58,7 +58,7 @@ class KelolaPbbController extends Controller
             'kekurangan' => $request->kekurangan,
             'jatuh_tempo' => $request->jatuh_tempo,
             'status_bayar' => $request->status_bayar,
-            'kode_bayar' => $request->kode_bayar
+            'kode_bayar' => Carbon::now()->format('Ymd').$request->nop_id
         ]);
         $cetak = new Cetak();
         $cetak->pbb_id = $pbb->id;
