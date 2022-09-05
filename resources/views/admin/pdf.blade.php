@@ -36,7 +36,7 @@
                 @foreach ($cetak as $i => $row)
                     <tr>
                         <td>{{ ++$i }}</td>
-                        <td>{{ $row->nama_wp }}</td>
+                        <td>{{ $row->nops->nama_wp }}</td>
                         <td>{{ $row->tahun }}</td>
                         <td>Rp. {{ number_format($row->pbb) }}</td>
                         <td>Rp. {{ number_format($row->denda) }}</td>

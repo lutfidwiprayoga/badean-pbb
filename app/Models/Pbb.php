@@ -19,7 +19,7 @@ class Pbb extends Model
         'kode_bayar',
     ];
 
-    public function nop()
+    public function nops()
     {
         return $this->belongsTo(Nop::class, 'nop_id', 'id');
     }

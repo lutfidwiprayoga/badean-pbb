@@ -18,18 +18,23 @@ class RiwayatController extends Controller
     public function index(Request $request)
     {
 
+        $tahun_awal = $request->input('tahun_awal');
+        $tahun_akhir = $request->input('tahun_akhir');
         if (request()->tahun_awal || request()->tahun_akhir) {
-            $tahun_awal = $request->input('tahun_awal');
-            $tahun_akhir = $request->input('tahun_akhir');
-            $cetak = Pbb::join('cetaks', 'cetaks.pbb_id', '=', 'pbbs.id')->whereBetween('tahun', [$tahun_awal, $tahun_akhir])->get();
+            $cetak = Pbb::whereBetween('tahun', [$tahun_awal, $tahun_akhir])
+                ->get();
+            $total = DB::table('pbbs')
+                ->whereBetween('tahun', [$tahun_awal, $tahun_akhir])
+                ->select(DB::raw('sum(kekurangan) as kurang_bayar'))
+                ->get();
         } else {
             $cetak = Pbb::latest()->get();
+            $total = DB::table('pbbs')
+                // ->join('cetaks', 'cetaks.pbb_id', '=', 'pbbs.id')
+                ->select(DB::raw('sum(kekurangan) as kurang_bayar'))
+                ->get();
         }
-        $total = DB::table('pbbs')
-            ->join('cetaks', 'cetaks.pbb_id', '=', 'pbbs.id')
-            ->select(DB::raw('sum(kekurangan) as kurang_bayar'))
-            ->get();
-        return view('admin.riwayat', compact('cetak', 'total'));
+        return view('admin.riwayat', compact('cetak', 'total', 'tahun_awal', 'tahun_akhir'));
     }
 
     /**

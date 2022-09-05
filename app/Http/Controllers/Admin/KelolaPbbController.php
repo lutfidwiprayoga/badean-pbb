@@ -18,16 +18,25 @@ class KelolaPbbController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelola = Pbb::latest()->get();
+        if ($request->cari) {
+            $cari = $request->cari;
+            $kelola = Pbb::join('nops', 'pbbs.nop_id', '=', 'nops.id')
+                ->where('nops.nop', 'LIKE', '%' . $cari . '%')
+                ->orWhere('nops.nama_wp', 'LIKE', '%' . $cari . '%')
+                ->orWhere('pbbs.tahun', 'LIKE', '%' . $cari . '%')
+                ->get();
+        } else {
+            $kelola = Pbb::latest()->get();
+        }
         $user = User::where('role', 'masyarakat')->get();
         $nop = Nop::get();
         $max_id = DB::table('nops')->max('id');
         $nomor_urut = $max_id + 1;
         $now = Carbon::now();
         $tanggal = $now->year . $now->month . $now->day;
-        return view('admin.kelolaPbb', compact('kelola', 'user', 'nop', 'tanggal', 'nomor_urut'));
+        return view('admin.kelolaPbb', compact('kelola', 'user', 'nop'));
     }
 
     /**
@@ -48,7 +57,7 @@ class KelolaPbbController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $nop = Nop::find($request->input('id'));
         $pbb = Pbb::create([
             'nop_id' => $request->nop_id,
@@ -58,7 +67,7 @@ class KelolaPbbController extends Controller
             'kekurangan' => $request->kekurangan,
             'jatuh_tempo' => $request->jatuh_tempo,
             'status_bayar' => $request->status_bayar,
-            'kode_bayar' => $request->kode_bayar
+            'kode_bayar' => Carbon::now()->format('Ymd') . $request->nop_id
         ]);
         $cetak = new Cetak();
         $cetak->pbb_id = $pbb->id;
@@ -98,7 +107,17 @@ class KelolaPbbController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pbb = Pbb::find($id);
+        $pbb->tahun = $request->tahun;
+        $pbb->pbb = $request->pbb;
+        $pbb->denda = $request->denda;
+        $pbb->kekurangan = $request->kekurangan;
+        $pbb->jatuh_tempo = $request->jatuh_tempo;
+        $pbb->status_bayar = $request->status_bayar;
+        $pbb->kode_bayar = $request->kode_bayar;
+        $pbb->save();
+
+        return redirect()->back()->with('sukses', 'Data Berhasil Di Update');
     }
 
     /**
@@ -109,6 +128,8 @@ class KelolaPbbController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pbb = Pbb::find($id);
+        $pbb->delete();
+        return redirect()->back()->with('sukses', 'Data Berhasil Di Hapus');
     }
 }

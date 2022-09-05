@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header">
                     <div class="row">
                         <div class="col-md-6 my-2">
                             <form action="{{ route('riwayatpbb.index') }}" method="GET">
@@ -33,11 +33,23 @@
                             </form>
                         </div>
                         <div class="col-md-6 my-2">
-                            <a type="button" href="{{ route('admin.pdf') }}" class="btn btn-success" style="float: right">
-                                Cetak PDF
-                            </a>
+                            @if (Request::input('tahun_awal', 'tahun_akhir'))
+                                <form action="{{ route('admin.pdf') }}" method="GET">
+                                    <input type="text" name="tahun_awal_id" value="{{ $tahun_awal }}" hidden>
+                                    <input type="text" name="tahun_akhir_id" value="{{ $tahun_akhir }}" hidden>
+                                    <button type="submit" class="btn btn-success" style="float: right">Cetak
+                                        PDF</button>
+                                </form>
+                            @else
+                                <a type="button" href="{{ route('admin.pdf') }}" class="btn btn-success"
+                                    style="float: right">
+                                    Cetak PDF
+                                </a>
+                            @endif
                         </div>
                     </div>
+                </div>
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table table-bordered" style="width:100%">
@@ -59,9 +71,9 @@
                                     @foreach ($cetak as $i => $row)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $row->nop->nop }}</td>
-                                            <td>{{ $row->nop->nama_wp }}</td>
-                                            <td>{{ $row->nop->alamat_wp }}</td>
+                                            <td>{{ $row->nops->nop }}</td>
+                                            <td>{{ $row->nops->nama_wp }}</td>
+                                            <td>{{ $row->nops->alamat_wp }}</td>
                                             <td>{{ $row->tahun }}</td>
                                             <td>Rp. {{ number_format($row->pbb) }}</td>
                                             <td>Rp. {{ number_format($row->denda) }}</td>

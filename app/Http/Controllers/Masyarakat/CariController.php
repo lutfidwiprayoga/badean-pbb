@@ -17,13 +17,21 @@ class CariController extends Controller
     public function cari(Request $request)
     {
         $cari = $request->cari;
-        $hasil = Pbb::join('nops', 'pbbs.nop_id', '=', 'nops.id')->where('nops.nop', 'like', "%" . $cari . "%")
+        $hasil = Pbb::join('nops', 'pbbs.nop_id', '=', 'nops.id')
+            ->where('nops.nop', 'like', "%" . $cari . "%")
+            ->get();
+        $pbb = Pbb::join('nops', 'pbbs.nop_id', '=', 'nops.id')
+            ->where('nops.nop', 'like', "%" . $cari . "%")
+            ->select('nop_id')
+            ->groupBy('nop_id')
             ->get();
         $now = today();
         $total = DB::table('pbbs')
-            ->join('cetaks', 'pbbs.id', '=', 'cetaks.pbb_id')
-            ->where('status_bayar', null)
-            ->where('cetaks.tanggal_print', today())
+            // ->join('cetaks', 'pbbs.id', '=', 'cetaks.pbb_id')
+            ->join('nops', 'pbbs.nop_id', '=', 'nops.id')
+            ->where('nops.nop', 'like', "%" . $cari . "%")
+            // ->where('status_bayar', null)
+            // ->where('cetaks.tanggal_print', today())
             ->select(
                 DB::raw('SUM(pbb) as total_pbb'),
                 DB::raw('SUM(denda) as total_denda'),
@@ -34,6 +42,6 @@ class CariController extends Controller
             )
             ->get();
         // dd($total);
-        return view('masyarakat.caripbb', compact('hasil', 'total', 'cari'));
+        return view('masyarakat.caripbb', compact('hasil', 'total', 'cari', 'pbb'));
     }
 }

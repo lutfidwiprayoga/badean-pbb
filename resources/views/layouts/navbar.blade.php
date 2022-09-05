@@ -13,7 +13,7 @@
                             PBB</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
+                        <a class="nav-link" href="/informasi"><i class="fa fa-info-circle"></i> Informasi</a>
                     </li>
                 @else
                     @if (Auth::user()->role == 'masyarakat')
@@ -26,7 +26,7 @@
                                 Pencarian Data PBB</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
+                            <a class="nav-link" href="/informasi"><i class="fa fa-info-circle"></i> Informasi</a>
                         </li>
                     @elseif (Auth::user()->role == 'admin')
                         <li class="nav-item">
@@ -46,7 +46,7 @@
                                 Data PBB</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fa fa-info-circle"></i> Informasi</a>
+                            <a class="nav-link" href="/informasi"><i class="fa fa-info-circle"></i> Informasi</a>
                         </li>
                     @endif
                 @endguest

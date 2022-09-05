@@ -19,49 +19,51 @@
         <h3>
             <center>Rekapitulasi Pajak Bumi & Bangunan Desa Badean</center>
         </h3>
-        @foreach ($hasil as $i => $data)
-            <div class="col-md-12">
-                <table class="table-condensed">
+        <div class="col-md-12">
+            <table class="table-condensed">
+                @foreach ($pbb as $i => $data)
                     <tr>
                         <th width="50%">NOP</th>
                         <th width="30px">:</th>
-                        <th>{{ $data->nop }}</th>
+                        <th>{{ $data->nops->nop }}</th>
                     </tr>
                     <tr>
                         <th width="50%">Alamat Objek Pajak</th>
                         <th width="30px">:</th>
-                        <th>{{ $data->user->alamat }}</th>
+                        <th>{{ $data->nops->user->alamat }}</th>
                     </tr>
                     <tr>
                         <th width="50%">Nama Wajib Pajak</th>
                         <th width="30px">:</th>
-                        <th>{{ $data->nama_wp }}</th>
+                        <th>{{ $data->nops->nama_wp }}</th>
                     </tr>
                     <tr>
                         <th width="50%">Alamat Wajib Pajak</th>
                         <th width="30px">:</th>
-                        <th>{{ $data->alamat_wp }}</th>
+                        <th>{{ $data->nops->alamat_wp }}</th>
                     </tr>
                     <tr>
                         <th width="50%">Tanggal Print Out</th>
                         <th width="30px">:</th>
                         <th>{{ date('d/m/Y', strtotime(today())) }}</th>
                     </tr>
-                </table>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>NO</th>
-                            <th>NAMA WAJIB PAJAK</th>
-                            <th>TAHUN WAJIB PAJAK</th>
-                            <th>PBB</th>
-                            <th>DENDA(*)</th>
-                            <th>JATUH TEMPO</th>
-                            <th>KURANG BAYAR</th>
-                            <th>STATUS BAYAR</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                @endforeach
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>NO</th>
+                        <th>NAMA WAJIB PAJAK</th>
+                        <th>TAHUN WAJIB PAJAK</th>
+                        <th>PBB</th>
+                        <th>DENDA(*)</th>
+                        <th>JATUH TEMPO</th>
+                        <th>KURANG BAYAR</th>
+                        <th>STATUS BAYAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($hasil as $i => $data)
                         <tr>
                             <td>{{ ++$i }}</td>
                             <td>{{ $data->nama_wp }}</td>
@@ -72,29 +74,29 @@
                             <td>Rp. {{ number_format($data->kekurangan) }}</td>
                             <td>{{ $data->status_bayar }}</td>
                         </tr>
-                    </tbody>
-                    <tfoot>
-                        <thead>
-                            @foreach ($total as $data)
-                                <tr>
-                                    <th colspan="7">TOTAL PBB YANG BELUM
-                                        DIBAYAR</th>
-                                    <th>Rp. {{ number_format($data->total_pbb) }}</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="7">TOTAL DENDA (SESUAI TANGGAL <i>PRINTOUT</i>)</th>
-                                    <th>Rp. {{ number_format($data->total_denda) }}</th>
-                                </tr>
-                                <tr>
-                                    <th colspan="7">JUMLAH YANG HARUS DIBAYAR</th>
-                                    <th>Rp. {{ number_format($data->total_dibayar) }}</th>
-                                </tr>
-                            @endforeach
-                        </thead>
-                    </tfoot>
-                </table>
-            </div>
-        @endforeach
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <thead>
+                        @foreach ($total as $data)
+                            <tr>
+                                <th colspan="7">TOTAL PBB YANG BELUM
+                                    DIBAYAR</th>
+                                <th>Rp. {{ number_format($data->total_pbb) }}</th>
+                            </tr>
+                            <tr>
+                                <th colspan="7">TOTAL DENDA (SESUAI TANGGAL <i>PRINTOUT</i>)</th>
+                                <th>Rp. {{ number_format($data->total_denda) }}</th>
+                            </tr>
+                            <tr>
+                                <th colspan="7">JUMLAH YANG HARUS DIBAYAR</th>
+                                <th>Rp. {{ number_format($data->total_dibayar) }}</th>
+                            </tr>
+                        @endforeach
+                    </thead>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </body>
 

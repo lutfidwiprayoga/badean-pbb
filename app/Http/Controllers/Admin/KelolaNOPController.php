@@ -80,7 +80,8 @@ class KelolaNOPController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Nop::find($id)->update($request->all());
+        return redirect()->back()->with('sukses', 'Data Berhasil Di update');
     }
 
     /**
@@ -91,6 +92,8 @@ class KelolaNOPController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nop = Nop::find($id);
+        $nop->delete();
+        return redirect()->back()->with('sukses', 'Data Berhasil Dihapus');
     }
 }
