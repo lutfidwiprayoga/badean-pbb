@@ -29,6 +29,10 @@ Route::get('/informasi', function () {
     return view('informasi');
 });
 
+Route::get('/informasi', function () {
+    return view('informasi');
+});
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //masyarakat

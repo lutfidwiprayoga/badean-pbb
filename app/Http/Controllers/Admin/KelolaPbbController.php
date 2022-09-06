@@ -36,6 +36,7 @@ class KelolaPbbController extends Controller
         $nomor_urut = $max_id + 1;
         $now = Carbon::now();
         $tanggal = $now->year . $now->month . $now->day;
+        // dd($kelola);
         return view('admin.kelolaPbb', compact('kelola', 'user', 'nop'));
     }
 
@@ -114,7 +115,9 @@ class KelolaPbbController extends Controller
         $pbb->kekurangan = $request->kekurangan;
         $pbb->jatuh_tempo = $request->jatuh_tempo;
         $pbb->status_bayar = $request->status_bayar;
-        $pbb->kode_bayar = $request->kode_bayar;
+        if ($pbb->status_bayar == 'LUNAS') {
+            $pbb->kode_bayar = Carbon::now()->format('Ymd') . $pbb->nop_id;
+        }
         $pbb->save();
 
         return redirect()->back()->with('sukses', 'Data Berhasil Di Update');

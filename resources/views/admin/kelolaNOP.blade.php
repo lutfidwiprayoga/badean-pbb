@@ -18,7 +18,6 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NAMA OBJEK PAJAK</th>
                                 <th>NOP</th>
                                 <th>NAMA WAJIB PAJAK</th>
                                 <th>ALAMAT WAJIB PAJAK</th>
@@ -29,7 +28,6 @@
                             @foreach ($nop as $i => $row)
                                 <tr>
                                     <td>{{ ++$i }}</td>
-                                    <td>{{ $row->user->name }}</td>
                                     <td>{{ $row->nop }}</td>
                                     <td>{{ $row->nama_wp }}</td>
                                     <td>{{ $row->alamat_wp }}</td>
@@ -59,19 +57,19 @@
                     @csrf
                     <div class="modal-body">
                         <div class="m-2 row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="nop" class="form-label">Kode Objek Pajak (NOP)*</label>
                                 <input type="text" class="form-control" id="nop" name="nop"
                                     placeholder="Masukkan Nomor Objek Pajak" required>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="nop" class="form-label">Nama Objek Pajak*</label>
                                 <select name="user_id" class="form-select" required>
                                     @foreach ($user as $us)
                                         <option value="{{ $us->id }}">{{ $us->name }}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="m-2 row">
                             <div class="col-md-6">

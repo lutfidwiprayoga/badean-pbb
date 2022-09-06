@@ -201,7 +201,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <input type="hidden" name=kode_bayar"" value="{{ $tanggal . $nomor_urut }}">
+                            <input type="hidden" name=kode_bayar"" value="{{ $row->kode_bayar }}">
                         </div>
                         <div class="modal-footer">
                             <div class="input-group mb-1">
@@ -219,7 +219,7 @@
     @endforeach
     <!-- Modal Delete Data -->
     @foreach ($nop as $row)
-        <div class="modal fade" id="deleteData{{ $row->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="deleteData{{ $row->id }}" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
