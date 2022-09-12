@@ -218,7 +218,7 @@
         </div>
     @endforeach
     <!-- Modal Delete Data -->
-    @foreach ($nop as $row)
+    @foreach ($kelola as $row)
         <div class="modal fade" id="deleteData{{ $row->id }}" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">

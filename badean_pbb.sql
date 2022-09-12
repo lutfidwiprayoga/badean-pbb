@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 06 Sep 2022 pada 09.00
+-- Waktu pembuatan: 12 Sep 2022 pada 03.31
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -51,7 +51,9 @@ INSERT INTO `cetaks` (`id`, `pbb_id`, `tanggal_print`, `created_at`, `updated_at
 (9, 9, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
 (10, 10, NULL, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
 (11, 8, NULL, '2022-09-05 07:46:24', '2022-09-05 07:46:24'),
-(12, 9, NULL, '2022-09-05 08:13:11', '2022-09-05 08:13:11');
+(12, 9, NULL, '2022-09-05 08:13:11', '2022-09-05 08:13:11'),
+(13, 10, NULL, '2022-09-11 18:14:33', '2022-09-11 18:14:33'),
+(14, 11, NULL, '2022-09-11 18:27:15', '2022-09-11 18:27:15');
 
 -- --------------------------------------------------------
 
@@ -133,7 +135,7 @@ INSERT INTO `niks` (`id`, `nik`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `nops` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `nop` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nop` bigint(20) NOT NULL,
   `nama_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `alamat_wp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -145,14 +147,14 @@ CREATE TABLE `nops` (
 --
 
 INSERT INTO `nops` (`id`, `user_id`, `nop`, `nama_wp`, `alamat_wp`, `created_at`, `updated_at`) VALUES
-(1, 2, '351025000703000050', 'ABD. AZIZ, SH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-09-05 07:37:03'),
-(2, 2, '351025000703000060', 'HOLILAH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(3, 3, '351025000703000090', 'SUHRAN P FAUZI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(4, 4, '351025000703000110', 'H. MAHRUS', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(5, 5, '351025000703000120', 'MANSURI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(6, 6, '351025000703600340', 'ALIMI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(7, 7, '351025000703600710', 'SATUNI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
-(8, 8, '35102500702000150', 'ABD AZIZ, SH', 'DSN JATISARI', '2022-08-29 21:29:56', '2022-08-29 21:29:56');
+(1, 2, 351025000703000050, 'ABD. AZIZ, SH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-09-05 07:37:03'),
+(2, 2, 351025000703000060, 'HOLILAH', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(3, 3, 351025000703000090, 'SUHRAN P FAUZI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(4, 4, 351025000703000110, 'H. MAHRUS', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(5, 5, 351025000703000120, 'MANSURI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(6, 6, 351025000703600340, 'ALIMI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(7, 7, 351025000703600710, 'SATUNI', 'DSN JATISARI', '2022-08-29 20:54:31', '2022-08-29 20:54:31'),
+(8, 8, 35102500702000150, 'ABD AZIZ, SH', 'DSN JATISARI', '2022-08-29 21:29:56', '2022-08-29 21:29:56');
 
 -- --------------------------------------------------------
 
@@ -198,7 +200,7 @@ INSERT INTO `pbbs` (`id`, `nop_id`, `tahun`, `pbb`, `denda`, `kekurangan`, `jatu
 (5, 3, '2021', '82814', '0', '0', '2022-08-30', 'LUNAS', 202208033, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
 (6, 4, '2021', '33760', '0', '0', '2022-08-30', 'LUNAS', 202208034, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
 (7, 5, '2021', '22000', '0', '0', '2022-08-30', 'LUNAS', 202208035, '2022-08-29 20:54:42', '2022-08-29 20:54:42'),
-(9, 7, '2022', '30000', '5000', '5000', '2022-09-09', NULL, NULL, '2022-09-05 08:13:11', '2022-09-05 08:13:11');
+(8, 7, '2022', '30000', '5000', '5000', '2022-09-09', 'LUNAS', 202209067, '2022-09-05 08:13:11', '2022-09-06 00:16:48');
 
 -- --------------------------------------------------------
 
@@ -289,7 +291,8 @@ ALTER TABLE `niks`
 -- Indeks untuk tabel `nops`
 --
 ALTER TABLE `nops`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nops_nop_unique` (`nop`);
 
 --
 -- Indeks untuk tabel `password_resets`
@@ -326,7 +329,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `cetaks`
 --
 ALTER TABLE `cetaks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -350,13 +353,13 @@ ALTER TABLE `niks`
 -- AUTO_INCREMENT untuk tabel `nops`
 --
 ALTER TABLE `nops`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `pbbs`
 --
 ALTER TABLE `pbbs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
