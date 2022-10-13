@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Sep 2022 pada 03.31
+-- Waktu pembuatan: 13 Okt 2022 pada 04.30
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -256,7 +256,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `username`, `nik`, `alamat`, `no_hp`
 (6, 'ALIMI', 'alimi@gmail.com', 'alimi', '3510142310930001', 'DNS JATISARI', '', 'masyarakat', NULL, '$2y$10$9CAhOPq.xFWKSfe0E3Gq4OtuNbv9qgPKm2V52i1JKAy4cb0EaxMCa', NULL, '2022-08-25 10:02:17', '2022-08-25 10:02:17'),
 (7, 'SATUNI', 'satuni@gmail.com', 'satuni', '3510141204760002', 'DNS JATISARI', '', 'masyarakat', NULL, '$2y$10$Edd1VH1U9ohwXChft/3ax.bXRCZDy.03VfX3iPnKytIL.WxnMszNa', NULL, '2022-08-25 10:02:17', '2022-08-25 10:02:17'),
 (8, 'ABD AZIZ, SH', 'abdaziz@gmail.com', 'abdaziz', '3510141402780005', 'DNS JATISARI', '', 'masyarakat', NULL, '$2y$10$aUr4h3kfTos/Y3x9wC2VT.GrhiI7z2KAodsBD/iKpR1LN2dKjeb5S', NULL, '2022-08-25 10:02:17', '2022-08-25 10:02:17'),
-(9, 'Muhammad Hizbi', 'muhammadhizbi@gmail.com', 'muh.hizbi', '351025000701900220', 'DSN JATISARI', '085311526205', 'masyarakat', NULL, '$2y$10$EmJFq.VAEKCoUzlmqg3.w.I4DXJhugUj7cH3B//K8hCq/l13TeTzu', NULL, '2022-08-25 10:26:06', '2022-08-25 10:26:06');
+(9, 'Muhammad Hizbi', 'muhammadhizbi@gmail.com', 'muh.hizbi', '351025000701900220', 'DSN JATISARI', '085311526205', 'masyarakat', NULL, '$2y$10$EmJFq.VAEKCoUzlmqg3.w.I4DXJhugUj7cH3B//K8hCq/l13TeTzu', NULL, '2022-08-25 10:26:06', '2022-08-25 10:26:06'),
+(10, 'Suprapto', 'suprapto@gmail.com', 'suprapto', '3550112548000002', 'DSN SUKOJATI', '088252443221', 'kepala_desa', NULL, '$2y$10$ASUxzZTTcZ34nS5EeK.BVuQ0lmz.7M2M0hzop.ff55l.7XiDMs4MO', NULL, '2022-10-12 19:19:31', '2022-10-12 19:19:31');
 
 --
 -- Indexes for dumped tables
@@ -371,7 +372,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

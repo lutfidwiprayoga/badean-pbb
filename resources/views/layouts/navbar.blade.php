@@ -26,6 +26,11 @@
                                 Pencarian Data PBB</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('masyarakat.history') }}"><i
+                                    class="fa fa-file-circle-question"></i>
+                                History Pembayaran</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/informasi"><i class="fa fa-info-circle"></i> Informasi</a>
                         </li>
                     @elseif (Auth::user()->role == 'admin')
@@ -47,6 +52,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/informasi"><i class="fa fa-info-circle"></i> Informasi</a>
+                        </li>
+                    @elseif(Auth::user()->role == 'kepala_desa')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('laporan-kepaladesa.index') }}"><i
+                                    class="fa fa-info-circle"></i> Laporan</a>
                         </li>
                     @endif
                 @endguest
