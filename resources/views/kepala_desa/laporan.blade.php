@@ -10,16 +10,6 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-header">
-                    <table border="0" cellspacing="5" cellpadding="5">
-                        <tbody>
-                            <tr>
-                                <td>Minimum date:</td>
-                                <td><input type="text" class="form-control" id="minDate" name="min"></td>
-                                <td>Maximum date:</td>
-                                <td><input type="text" class="form-control" id="maxDate" name="max"></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -52,7 +42,7 @@
                                         <td>{{ date('l,d F Y', strtotime($row->jatuh_tempo)) }}</td>
                                         <td>Rp. {{ number_format($row->denda) }}</td>
                                         <td>Rp. {{ number_format($row->kekurangan) }}</td>
-                                        <td><b>{{ $row->status_bayar }}</b></td>
+                                        <td>{{ $row->status_bayar }}</td>
                                         <td><i>{{ $row->kode_bayar }}</i></td>
                                     </tr>
                                 @endforeach
@@ -80,35 +70,11 @@
     </div>
     <!-- Datatable-->
     <script>
-        var minDate, maxDate;
-
-        // Custom filtering function which will search data in column four between two values
-        $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-                var min = minDate.val();
-                var max = maxDate.val();
-                var date = new Date(data[4]);
-
-                if (
-                    (min === null && max === null) ||
-                    (min === null && date <= max) ||
-                    (min <= date && max === null) ||
-                    (min <= date && date <= max)
-                ) {
-                    return true;
-                }
-                return false;
-            }
-        );
         $(document).ready(function() {
-            // Create date inputs
-            minDate = new DateTime($('#minDate'), {
-                format: 'MMMM Do YYYY'
+            var table = $('#tableHistory').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['pdf', 'print', ]
             });
-            maxDate = new DateTime($('#maxDate'), {
-                format: 'MMMM Do YYYY'
-            });
-            var table = $('#tableHistory').DataTable();
             $("#tableHistory tfoot tr th").each(function(i) {
                 var select = $('<select><option value=""></option></select>')
                     .appendTo($(this).empty())
@@ -122,10 +88,6 @@
                 table.column(i).data().unique().sort().each(function(d, j) {
                     select.append('<option value="' + d + '">' + d + '</option>')
                 });
-            });
-            // Refilter the table
-            $('#minDate, #maxDate').on('change', function() {
-                table.draw();
             });
         });
     </script>

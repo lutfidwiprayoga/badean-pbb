@@ -123,6 +123,7 @@
                                 <select name="status_bayar" class="form-select">
                                     <option value=""></option>
                                     <option value="LUNAS">LUNAS</option>
+                                    <option value="BELUM LUNAS">BELUM LUNAS</option>
                                 </select>
                             </div>
                             {{-- <input type="hidden" name=kode_bayar"" value="{{ $tanggal . $nomor_urut }}"> --}}
