@@ -9,6 +9,15 @@
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
+                <div class="card-body">
+                    <div id="statusBayar"></div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6 my-2">
@@ -52,48 +61,63 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>NOP</th>
-                                        <th>NAMA WAJIB PAJAK</th>
-                                        <th>ALAMAT WAJIB PAJAK</th>
-                                        <th>TAHUN PAJAK</th>
-                                        <th>PBB</th>
-                                        <th>DENDA(*)</th>
-                                        <th>KURANG BAYAR</th>
-                                        <th>STATUS BAYAR</th>
-                                        <th>KODE BAYAR</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cetak as $i => $row)
+                            <div class="table-responsive">
+                                <table class="dt-responsive display nowrap table-striped table-bordered table"
+                                    style="width:100%" id="tableRiwayat">
+                                    <thead>
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $row->nops->nop }}</td>
-                                            <td>{{ $row->nops->nama_wp }}</td>
-                                            <td>{{ $row->nops->alamat_wp }}</td>
-                                            <td>{{ $row->tahun }}</td>
-                                            <td>Rp. {{ number_format($row->pbb) }}</td>
-                                            <td>Rp. {{ number_format($row->denda) }}</td>
-                                            <td>Rp. {{ number_format($row->kekurangan) }}</td>
-                                            <td><b>{{ $row->status_bayar }}</b></td>
-                                            <td><i>{{ $row->kode_bayar }}</i></td>
+                                            <th>No</th>
+                                            <th>NOP</th>
+                                            <th>NAMA WAJIB PAJAK</th>
+                                            <th>ALAMAT WAJIB PAJAK</th>
+                                            <th>TAHUN PAJAK</th>
+                                            <th>PBB</th>
+                                            <th>DENDA(*)</th>
+                                            <th>KURANG BAYAR</th>
+                                            <th>STATUS BAYAR</th>
+                                            <th>KODE BAYAR</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot>
-                                    @foreach ($total as $row)
                                         <tr>
-                                            <th colspan="7">Total</th>
-                                            <th>Rp. {{ number_format($row->kurang_bayar) }}</th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>No</th>
+                                            <th>NOP</th>
+                                            <th>NAMA WAJIB PAJAK</th>
+                                            <th>ALAMAT WAJIB PAJAK</th>
+                                            <th>TAHUN PAJAK</th>
+                                            <th>PBB</th>
+                                            <th>DENDA(*)</th>
+                                            <th>KURANG BAYAR</th>
+                                            <th>STATUS BAYAR</th>
+                                            <th>KODE BAYAR</th>
                                         </tr>
-                                    @endforeach
-                                </tfoot>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($cetak as $i => $row)
+                                            <tr>
+                                                <td>{{ ++$i }}</td>
+                                                <td>{{ $row->nops->nop }}</td>
+                                                <td>{{ $row->nops->nama_wp }}</td>
+                                                <td>{{ $row->nops->alamat_wp }}</td>
+                                                <td>{{ $row->tahun }}</td>
+                                                <td>Rp. {{ number_format($row->pbb) }}</td>
+                                                <td>Rp. {{ number_format($row->denda) }}</td>
+                                                <td>Rp. {{ number_format($row->kekurangan) }}</td>
+                                                <td>{{ $row->status_bayar }}</td>
+                                                <td>{{ $row->kode_bayar }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        @foreach ($total as $row)
+                                            <tr>
+                                                <th colspan="7">Total</th>
+                                                <th>Rp. {{ number_format($row->kurang_bayar) }}</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        @endforeach
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,6 +130,80 @@
             theme: "bootstrap-5",
             width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
             placeholder: $(this).data('placeholder'),
+        });
+    </script>
+    <!--Datatable -->
+    <script>
+        $(document).ready(function() {
+            var table = $('#tableRiwayat').DataTable();
+            $("#tableRiwayat thead tr th").each(function(i) {
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(this).empty())
+                    .on('change', function() {
+                        var val = $(this).val();
+                        table.column(i)
+                            .search(val ? '^' + $(this).val() + '$' :
+                                val, true, false)
+                            .draw();
+                    });
+                table.column(i).data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+        });
+    </script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!--Target OA Win Java-->
+    <script>
+        var barColors = (function() {
+            var colors = [],
+                base = Highcharts.getOptions().colors[0],
+                i;
+            for (i = 0; i < 10; i += 1) {
+                // Start out with a darkened base color (negative brighten), and end
+                // up with a much brighter color
+                colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+            }
+            return colors;
+        }());
+        Highcharts.setOptions({
+            colors: ['#559584']
+        });
+        Highcharts.chart('statusBayar', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'PBB DESA BADEAN'
+            },
+            xAxis: {
+                categories: {!! json_encode($statusnya) !!},
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '#PEMBAYARAN'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">Total : </td>' +
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Jumlah Pembayaran',
+                data: {!! json_encode($total_status) !!}
+            }]
         });
     </script>
 @endsection

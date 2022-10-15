@@ -34,7 +34,23 @@ class RiwayatController extends Controller
                 ->select(DB::raw('sum(kekurangan) as kurang_bayar'))
                 ->get();
         }
-        return view('admin.riwayat', compact('cetak', 'total', 'tahun_awal', 'tahun_akhir'));
+        $pbb = DB::table('pbbs')->select('status_bayar', DB::raw('count(*) as total'))
+            ->groupBy('status_bayar')
+            ->get();
+        $statusnya = [];
+        $total_status = [];
+        foreach ($pbb as $data) {
+            $statusnya[] = $data->status_bayar;
+            $total_status[] = $data->total;
+        }
+        return view('admin.riwayat', compact(
+            'cetak',
+            'total',
+            'tahun_awal',
+            'tahun_akhir',
+            'statusnya',
+            'total_status'
+        ));
     }
 
     /**

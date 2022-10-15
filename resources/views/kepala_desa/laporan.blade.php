@@ -9,6 +9,15 @@
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
+                <div class="card-body">
+                    <div id="statusBayar"></div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
                 <div class="card-header">
                     <table border="0" cellspacing="5" cellpadding="5">
                         <tbody>
@@ -128,6 +137,60 @@
             $('#minDate, #maxDate').on('change', function() {
                 table.draw();
             });
+        });
+    </script>
+    <!--Grafik Chart-->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script>
+        var barColors = (function() {
+            var colors = [],
+                base = Highcharts.getOptions().colors[0],
+                i;
+            for (i = 0; i < 10; i += 1) {
+                // Start out with a darkened base color (negative brighten), and end
+                // up with a much brighter color
+                colors.push(Highcharts.color(base).brighten((i - 3) / 7).get());
+            }
+            return colors;
+        }());
+        Highcharts.setOptions({
+            colors: ['#559584']
+        });
+        Highcharts.chart('statusBayar', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'PBB DESA BADEAN'
+            },
+            xAxis: {
+                categories: {!! json_encode($status) !!},
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '#PEMBAYARAN'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">Total : </td>' +
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Jumlah Pembayaran',
+                data: {!! json_encode($total_status) !!}
+            }]
         });
     </script>
 @endsection
